@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Home Page</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>LIBRETA DE DIRECCIONES</h1>
+	<br />
+	<div>
+		<h1>Familiares</h1>
+		<div class="pull-right">
+			<form action="#" th:action="@{/relatives/search}" th:method="post">
+				<label>Búsqueda por nombre</label>
+				<input type="text" id="searchNameF" name="searchNameF" placeholder="Busqueda"/>
+				<button type="submit" class="btn btn-primary">Buscar</button>
+			</form>
+		</div>
+	</div>
+	<table class="table table-striped">
+		<tr>
+			<th>Nombre</th>
+			<th>Teléfono</th>
+			<th>Domicilio</th>
+			<th>Relación</th>
+			<th colspan="2"></th>
+		</tr>
+		<tbody>
+			<tr th:each="familiar : ${relativeList}">
+				<td th:text="${familiar.firstName} + ' ' + ${familiar.lastName}"></td>
+				<td th:text="${familiar.phone}"></td>
+				<td th:text="${familiar.address}"></td>
+				<td >
+					<span th:if="${familiar.type} == 'A'" th:text="Amigo"></span>
+					<span th:if="${familiar.type} == 'F'" th:text="Familiar"></span>
+				</td>
+				<td>
+					<form action="#" th:action="@{'/relatives/relativeChangeForm/{id}'(id=${familiar.id})}" th:method="GET">
+						<input type="hidden" name="_method" value="edit" />
+						<button type="submit" id="submitButton" class="btn btn-warning">Modificar</button>
+					</form>
+				</td>
+				<td>
+					<form action="#" th:action="@{'/relatives/deleteRelative/{id}'(id=${familiar.id})}" th:method="delete">
+						<input type="hidden" name="_method" value="delete" />
+						<button type="submit" id="submitButton" class="btn btn-danger">Borrar</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/relativeForm" class="btn btn-success">Agregar familiar</a>
+
+	<h1>Compañeros de trabajo</h1>
+	<div class="pull-right">
+		<form action="#" th:action="@{/coworkers/search}" th:method="post">
+			<label>Búsqueda por nombre</label>
+			<input type="text" id="searchNameCW" name="searchNameCW" placeholder="Busqueda"/>
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
+	</div>
+	<table class="table table-striped">
+		<tr>
+			<th>Nombre</th>
+			<th>Teléfono</th>
+			<th>Dirección</th>
+			<th>Compañía</th>
+			<th colspan="2"></th>
+		</tr>
+		<tbody>
+			<tr th:each="coworker : ${coworkerList}">
+				<td th:text="${coworker.firstName} + ' ' + ${coworker.lastName}"></td>
+				<td th:text="${coworker.phone}"></td>
+				<td th:text="${coworker.address}"></td>
+				<td th:text="${coworker.type}"></td>
+				<td>
+					<form action="#" th:action="@{'/coworkers/coworkerChangeForm/{id}'(id=${coworker.id})}" th:method="get">
+						<input type="hidden" name="_method" value="edit" />
+						<button type="submit" id="submitButton" class="btn btn-warning">Modificar</button>
+					</form>
+				</td>
+				<td>
+					<form action="#" th:action="@{'/coworkers/deleteCoworker/{id}'(id=${coworker.id})}" th:method="delete">
+						<input type="hidden" name="_method" value="delete" />
+						<button type="submit" id="submitButton" class="btn btn-danger">Borrar</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/coworkerForm" class="btn btn-success">Agregar compañero</a>
+</body>
+</html>

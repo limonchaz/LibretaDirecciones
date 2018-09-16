@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Editar Familiar</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>EDITAR FAMILIAR</h1>
+	<br />
+	<div>
+		<form th:object="${relative}" th:action="@{/relatives/updateRelative}" action="#" method="post">
+			<input type="hidden" th:field="*{id}"/>
+			<label>* Nombre</label>
+			<input type="text" th:field="${relative.firstName}" class="form-control" placeholder="Nombre"/>
+			<div style="clear: both; display: block; height: 10px"></div>
+			<label>* Apellido paterno</label>
+			<input type="text" th:field="${relative.lastName}" class="form-control" placeholder="Apellido paterno"/>
+			<div style="clear: both; display: block; height: 10px"></div>
+			<label>* Apellido materno</label>
+			<input type="text" th:field="${relative.mothersName}" class="form-control" placeholder="Apellido materno"/>
+			<div style="clear: both; display: block; height: 10px"></div>
+			<label>* Teléfono</label>
+			<input type="text" th:field="${relative.phone}" class="form-control" placeholder="Teléfono"/>
+			<div style="clear: both; display: block; height: 10px"></div>
+			<label>Dirección</label>
+			<input type="text" th:field="${relative.address}" class="form-control" placeholder="Dirección"/>
+			<div style="clear: both; display: block; height: 10px"></div>
+			<label>* Parentesco</label>
+			<br />
+			<label>
+			Amigo
+				<input type="radio" th:field="${relative.type}" th:value="A"/>
+			</label>
+			<label >Familiar</label>
+			<input type="radio" th:field="${relative.type}" th:value="F"/>
+			
+			<div style="clear: both; display: block; height: 10px"></div>
+			<input type="submit" class="btn btn-success" value="Editar" />
+			<a href="#" th:href="@{/}" class="btn btn-danger" role="button">Cancelar</a>
+		</form>
+	</div>
+</body>
+</html>

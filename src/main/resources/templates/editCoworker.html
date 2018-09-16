@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Editar Compañero de Trabajo</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>EDITAR COMPAÑERO DE TRABAJO</h1>
+	<br />
+	<div>
+		<form th:object="${coworker}" th:action="@{/coworkers/updateCoworker}" action="#" method="post">
+			<input type="hidden" th:field="*{id}"/>
+			<label>* Nombre</label>
+			<input type="text" th:field="*{firstName}" th:value="${firstName}" class="form-control" placeholder="Nombre"/>
+			<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:text="'El nombre no puede estar vacio'" class="alert alert-danger"></p>
+			<label>* Apellido paterno</label>
+			<input type="text" th:field="*{lastName}" class="form-control" placeholder="Apellido paterno"/>
+			<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:text="'El apellido paterno no puede estar vacio'" class="alert alert-danger"></p>
+			<label>* Apellido materno</label>
+			<input type="text" th:field="*{mothersName}" class="form-control" placeholder="Apellido materno"/>
+			<p th:if="${#fields.hasErrors('mothersName')}" th:errors="*{mothersName}" th:text="'El apellido materno no puede estar vacio'" class="alert alert-danger"></p>
+			<label>* Teléfono</label>
+			<input type="text" th:field="*{phone}" class="form-control" placeholder="Teléfono"/>
+			<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:text="'El teléfono no puede estar vacio'" class="alert alert-danger"></p>
+			
+			<label>Dirección</label>
+			<input type="text" th:field="*{address}" class="form-control" placeholder="Dirección"/>
+			<label>Empresa</label>
+			<input type="text" th:field="*{company}" class="form-control" placeholder="Empresa"/>
+			<label>Área</label>
+			<input type="text" th:field="*{area}" class="form-control" placeholder="Area"/>
+			
+			<label>* Rubro de la empresa</label>
+			<input type="text" th:field="*{type}" class="form-control" placeholder="Rubro"/>
+			<p th:if="${#fields.hasErrors('type')}" th:errors="*{type}" th:text="'El rubro no puede estar vacio'" class="alert alert-danger"></p>
+			<br/>
+			<input type="submit" class="btn btn-success" value="Guardar" />
+			<a href="#" th:href="@{/}" class="btn btn-danger" role="button">Cancelar</a>
+		</form>
+	</div>
+</body>
+</html>
